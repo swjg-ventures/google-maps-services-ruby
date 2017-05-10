@@ -63,8 +63,9 @@ module GoogleMapsService::Apis
     #         by the snap_to_roads function. You can pass up to 100 Place IDs.
     #
     # @return [Array] Array of speed limits.
-    def speed_limits(place_ids)
+    def speed_limits(place_ids, speed_unit='KPH')
       params = GoogleMapsService::Convert.as_list(place_ids).map { |place_id| ['placeId', place_id] }
+      params << ['units', speed_unit]
 
       return get('/v1/speedLimits', params,
                  base_url: ROADS_BASE_URL,
