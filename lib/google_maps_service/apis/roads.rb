@@ -65,7 +65,7 @@ module GoogleMapsService::Apis
     # @return [Array] Array of speed limits.
     def speed_limits(place_ids, speed_unit='KPH')
       params = GoogleMapsService::Convert.as_list(place_ids).map { |place_id| ['placeId', place_id] }
-      params << ['units', speed_unit]
+      params << ['units', speed_unit] if speed_unit == 'MPH'
 
       return get('/v1/speedLimits', params,
                  base_url: ROADS_BASE_URL,
